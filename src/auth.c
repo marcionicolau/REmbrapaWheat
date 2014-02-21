@@ -21,7 +21,7 @@ int authenticate_system(const char *service, const char *username, const char *p
   
     if (retval != PAM_SUCCESS)  
     {  
-            printf("pam_start returned: %d\n ", retval);  
+            Rprintf("pam_start returned: %d\n ", retval);  
             return 0;  
     }  
   
@@ -35,21 +35,21 @@ int authenticate_system(const char *service, const char *username, const char *p
     {  
             if (retval == PAM_AUTH_ERR)  
             {  
-                    printf("Authentication failure.\n");  
+                Rprintf("Authentication failure.\n");  
             }  
             else  
             {  
-                printf("pam_authenticate returned %d\n", retval);  
+                Rprintf("pam_authenticate returned %d\n", retval);  
             }  
             return 0;  
     }  
   
-    printf("Authenticated.\n");  
+    Rprintf("Authenticated.\n");  
     retval = pam_end(local_auth_handle, retval);  
   
     if (retval != PAM_SUCCESS)  
     {  
-            printf("pam_end returned\n");  
+            Rprintf("pam_end returned\n");  
             return 0;  
     }  
       
@@ -59,7 +59,7 @@ int authenticate_system(const char *service, const char *username, const char *p
 SEXP auth(const char *login, const char *password){
    SEXP is_ok = PROTECT(allocVector(LGLSXP, 1)); 
    LOGICAL(is_ok)[0] = 0;
-  if (authenticate_system("system-auth", login, password) == 1)  
+  if (authenticate_system("su", login, password) == 1)  
     {  
         Rprintf("Authenticate with %s through system\n", login);  
         LOGICAL(is_ok)[0] = 1;

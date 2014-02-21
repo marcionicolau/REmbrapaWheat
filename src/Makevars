@@ -1,2 +1,4 @@
-PKG_CPPFLAGS+=-I../inst/include/ -DCOMPILING_DPLYR
+PKG_CXXFLAGS+=-I../inst/include/ 
+PKG_CFLAGS+=-I../inst/include -I/usr/include
 PKG_LDFLAGS+=-lpam
+PKG_LIBS+=-lpam
