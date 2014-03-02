@@ -1,3 +1,2 @@
+export(auth)
 useDynLib(REmbrapaWheat)
-exportPattern("^[[:alpha:]]+")
-importFrom(Rcpp, evalCpp)

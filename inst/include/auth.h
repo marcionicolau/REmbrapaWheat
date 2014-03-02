@@ -18,7 +18,7 @@ int function_conversation(int, const struct pam_message **, struct pam_response 
 int authenticate_system(const char *, const char *, const char *);
   
 
-SEXP auth(const char *, const char *);
+SEXP rew_auth(const char *, const char *);
 
 #ifdef __cplusplus
 }

@@ -24,9 +24,16 @@ int authenticate_system(const char *service, const char *username, const char *p
             Rprintf("pam_start returned: %d\n ", retval);  
             return 0;  
     }  
-  
+#if __DEBUG__
+    Rprintf("pam_start started.\n");
+#endif  
+
     reply = (struct pam_response *)malloc(sizeof(struct pam_response));  
-      
+
+#if __DEBUG__
+    Rprintf("User: %s, Password: %s.\n", username, strdup(password));
+#endif
+
     reply[0].resp = strdup(password);  
     reply[0].resp_retcode = 0;  
     retval = pam_authenticate(local_auth_handle, 0);  
@@ -56,10 +63,10 @@ int authenticate_system(const char *service, const char *username, const char *p
     return 1;  
 }  
 
-SEXP auth(const char *login, const char *password){
+SEXP rew_auth(const char *login, const char *password){
    SEXP is_ok = PROTECT(allocVector(LGLSXP, 1)); 
    LOGICAL(is_ok)[0] = 0;
-  if (authenticate_system("su", login, password) == 1)  
+  if (authenticate_system("common-auth", login, password) == 1)  
     {  
         Rprintf("Authenticate with %s through system\n", login);  
         LOGICAL(is_ok)[0] = 1;
