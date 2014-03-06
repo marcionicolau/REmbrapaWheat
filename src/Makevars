@@ -1,4 +1,4 @@
 PKG_CXXFLAGS+=-I../inst/include/ -D__DEBUG__
-PKG_CFLAGS+=-I../inst/include -I/usr/include -D__DEBUG__
+PKG_CFLAGS+=-I../inst/include -I/usr/include
 PKG_LDFLAGS+=-lpam
 PKG_LIBS+=-lpam
